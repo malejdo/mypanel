@@ -3,16 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mi NightTab Web</title>
+    <title>Links Panel msoto</title>
+    <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/malejdo/mypanel/main/flavicon.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         :root {
-            --bg-primary: #222222; /* gris oscuro */
-            --bg-secondary: #333333; /* gris más claro */
-            --accent: #000000; /* negro */
-            --highlight: #ffffff; /* blanco */
-            --text: #ffffff; /* blanco */
-            --text-muted: #cccccc; /* gris claro */
+            --bg-primary: #222222;
+            --bg-secondary: #333333;
+            --accent: #000000;
+            --highlight: #ffffff;
+            --text: #ffffff;
+            --text-muted: #cccccc;
         }
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -22,93 +23,127 @@
             padding: 20px;
         }
         .header {
-            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 18px;
             margin-bottom: 40px;
+        }
+        .header-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 8px;
+            background: #000;
+            box-shadow: 0 2px 8px #111;
         }
         .header h1 {
             color: var(--highlight);
-            font-size: 2.5em;
-            margin-bottom: 10px;
-        }
-        .header p {
-            color: var(--text-muted);
-            font-size: 1.1em;
+            font-size: 2.1em;
+            margin: 0;
+            font-weight: 700;
+            letter-spacing: 1px;
         }
         .grupo {
-            margin-bottom: 40px;
+            margin-bottom: 32px;
             background: var(--bg-secondary);
-            border-radius: 15px;
-            padding: 25px;
+            border-radius: 13px;
+            padding: 18px 12px 18px 12px;
             border: 1px solid #444;
         }
         .grupo h2 {
             color: var(--highlight);
-            font-size: 1.8em;
-            margin-bottom: 20px;
+            font-size: 1.3em;
+            margin-bottom: 16px;
             text-align: center;
             text-transform: uppercase;
             letter-spacing: 2px;
             border-bottom: 2px solid #444;
-            padding-bottom: 10px;
+            padding-bottom: 7px;
         }
         .links {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            gap: 20px;
-            margin-top: 20px;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 12px;
+            margin-top: 10px;
         }
         .link-card {
             background: var(--accent);
-            border-radius: 12px;
-            padding: 20px;
+            border-radius: 10px;
+            padding: 10px 8px 10px 8px;
             text-align: center;
-            transition: all 0.3s ease;
+            transition: all 0.2s ease;
             border: 1px solid #444;
             cursor: pointer;
             position: relative;
             overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 80px;
         }
         .link-card:hover {
-            box-shadow: 0 10px 30px rgba(255,255,255,0.08);
+            box-shadow: 0 4px 16px rgba(255,255,255,0.08);
             border-color: var(--highlight);
+            background: #111;
         }
         .icon {
-            font-size: 2.5em;
-            margin-bottom: 15px;
+            font-size: 1.7em;
+            margin-bottom: 6px;
             color: #fff;
             background: #000;
             border-radius: 50%;
-            padding: 16px;
+            padding: 10px;
             display: inline-block;
             box-shadow: 0 2px 8px #111;
         }
         .link-name {
             color: var(--text);
-            font-size: 1em;
+            font-size: 0.98em;
             font-weight: 600;
             text-decoration: none;
             display: block;
-            margin-top: 10px;
+            margin-top: 2px;
+            margin-bottom: 0;
         }
         .link-card:hover .link-name {
             color: var(--highlight);
         }
-        /* AI GEN: solo nombre, sin icono ni link */
+        .link-card a {
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+        /* Hacer todo el box clickeable */
+        .link-card {
+            cursor: pointer;
+        }
+        .link-card[data-url]:hover {
+            background: #111;
+        }
+        /* AI GEN: solo nombre, minúscula, mismo tamaño, sin icono ni link */
         .grupo[data-name="AI GEN"] .links {
             display: flex;
             flex-wrap: wrap;
-            gap: 12px;
+            gap: 10px;
             justify-content: center;
         }
         .grupo[data-name="AI GEN"] .link-card {
             background: var(--accent);
             color: var(--text);
             border: 1px solid #444;
-            font-size: 1.1em;
-            padding: 14px 24px;
+            font-size: 1em;
+            padding: 10px 18px;
             border-radius: 8px;
             box-shadow: none;
             cursor: default;
+            text-transform: lowercase;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            min-width: 90px;
+            min-height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         .grupo[data-name="AI GEN"] .icon,
         .grupo[data-name="AI GEN"] a {
@@ -116,30 +151,30 @@
         }
         @media (max-width: 768px) {
             .links {
-                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-                gap: 15px;
+                grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+                gap: 8px;
             }
             .grupo {
-                padding: 20px;
-                margin-bottom: 30px;
+                padding: 12px;
+                margin-bottom: 18px;
             }
             .header h1 {
-                font-size: 2em;
+                font-size: 1.3em;
             }
             .link-card {
-                padding: 15px;
+                padding: 7px;
             }
             .icon {
-                font-size: 2em;
-                padding: 10px;
+                font-size: 1.1em;
+                padding: 6px;
             }
         }
     </style>
 </head>
 <body>
     <div class="header">
-        <h1>Mi NightTab Web</h1>
-        <p>Tus enlaces favoritos organizados y accesibles desde cualquier dispositivo</p>
+        <img src="https://raw.githubusercontent.com/malejdo/mypanel/main/flavicon.png" alt="Icono" class="header-icon">
+        <h1>Links Panel msoto</h1>
     </div>
     <div id="contenedor"></div>
     <script>
@@ -496,10 +531,12 @@
                     const card = document.createElement('div');
                     card.className = 'link-card';
                     if(grupo.name === 'AI GEN') {
-                        card.textContent = item.name;
+                        card.textContent = item.name.toLowerCase();
                     } else {
+                        card.setAttribute('data-url', item.url);
                         let iconHtml = item.icon ? '<i class="' + item.icon_prefix + ' fa-' + item.icon + ' icon"></i>' : '<span class="icon">🔗</span>';
-                        card.innerHTML = iconHtml + '<a class="link-name" href="' + item.url + '" target="_blank">' + item.name + '</a>';
+                        card.innerHTML = iconHtml + '<span class="link-name">' + item.name + '</span>';
+                        card.onclick = () => { window.open(item.url, '_blank'); };
                     }
                     divLinks.appendChild(card);
                 });
@@ -511,6 +548,4 @@
     </script>
 </body>
 </html>
-    </script>
-</body>
-</html>
+
