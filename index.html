@@ -6,6 +6,15 @@
     <title>Mi NightTab Web</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
+        :root {
+            --bg-primary: #1a1a2e;
+            --bg-secondary: #16213e;
+            --accent: #0f3460;
+            --highlight: #e94560;
+            --text: #ffffff;
+            --text-muted: #b8b8b8;
+        }
+        
         * {
             margin: 0;
             padding: 0;
@@ -14,8 +23,8 @@
         
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #1e1e2e, #2d2d44);
-            color: #e0e0e0;
+            background: linear-gradient(135deg, var(--bg-primary), var(--bg-secondary));
+            color: var(--text);
             min-height: 100vh;
             padding: 20px;
         }
@@ -26,9 +35,15 @@
         }
         
         .header h1 {
-            color: #64ffda;
+            color: var(--highlight);
             font-size: 2.5em;
             margin-bottom: 10px;
+            text-shadow: 0 0 20px rgba(233, 69, 96, 0.3);
+        }
+        
+        .header p {
+            color: var(--text-muted);
+            font-size: 1.1em;
         }
         
         .grupo {
@@ -36,15 +51,18 @@
             background: rgba(255, 255, 255, 0.05);
             border-radius: 15px;
             padding: 25px;
+            backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.1);
         }
         
         .grupo h2 {
-            color: #64ffda;
+            color: var(--highlight);
             font-size: 1.8em;
             margin-bottom: 20px;
             text-align: center;
-            border-bottom: 2px solid #64ffda;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            border-bottom: 2px solid var(--highlight);
             padding-bottom: 10px;
         }
         
@@ -56,37 +74,60 @@
         }
         
         .link-card {
-            background: linear-gradient(145deg, #2a2a3e, #1f1f2e);
+            background: linear-gradient(145deg, var(--accent), var(--bg-secondary));
             border-radius: 12px;
             padding: 20px;
             text-align: center;
             transition: all 0.3s ease;
-            border: 1px solid rgba(100, 255, 218, 0.2);
+            border: 1px solid rgba(233, 69, 96, 0.2);
             cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .link-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(233, 69, 96, 0.1), transparent);
+            transition: left 0.5s;
+        }
+        
+        .link-card:hover::before {
+            left: 100%;
         }
         
         .link-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(100, 255, 218, 0.2);
-            border-color: #64ffda;
+            box-shadow: 0 10px 30px rgba(233, 69, 96, 0.3);
+            border-color: var(--highlight);
         }
         
         .icon {
             font-size: 2.5em;
             margin-bottom: 15px;
-            color: #64ffda;
+            color: var(--highlight);
+            transition: transform 0.3s ease;
+        }
+        
+        .link-card:hover .icon {
+            transform: scale(1.2);
         }
         
         .link-name {
-            color: #e0e0e0;
+            color: var(--text);
             font-size: 1em;
             font-weight: 600;
             text-decoration: none;
             display: block;
+            transition: color 0.3s ease;
         }
         
         .link-card:hover .link-name {
-            color: #64ffda;
+            color: var(--highlight);
         }
         
         @media (max-width: 768px) {
@@ -94,17 +135,406 @@
                 grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
                 gap: 15px;
             }
+            
+            .grupo {
+                padding: 20px;
+                margin-bottom: 30px;
+            }
+            
+            .header h1 {
+                font-size: 2em;
+            }
+            
+            .link-card {
+                padding: 15px;
+            }
+            
+            .icon {
+                font-size: 2em;
+            }
         }
     </style>
 </head>
 <body>
     <div class="header">
         <h1>Mi NightTab Web</h1>
-        <p>Tus enlaces favoritos organizados</p>
+        <p>Tus enlaces favoritos organizados y accesibles desde cualquier dispositivo</p>
     </div>
     
     <div id="contenedor"></div>
     
-    <script src="nighttab.js"></script>
+    <script>
+        const grupos = [
+  {
+    "name": "DATA SCIENCE",
+    "items": [
+      {
+        "name": "JULIUS AI",
+        "url": "https://julius.ai/chat",
+        "icon": "tools",
+        "icon_prefix": "fas"
+      },
+      {
+        "name": "JUPYTER",
+        "url": "http://localhost:8889/tree",
+        "icon": "code",
+        "icon_prefix": "fas"
+      },
+      {
+        "name": "DATABRICKS",
+        "url": "https://community.cloud.databricks.com/?o=3451059260214446",
+        "icon": "file-code",
+        "icon_prefix": "fas"
+      },
+      {
+        "name": "COLAB",
+        "url": "https://colab.research.google.com/",
+        "icon": "google-plus-square",
+        "icon_prefix": "fab"
+      },
+      {
+        "name": "SCISPACE",
+        "url": "https://typeset.io/es",
+        "icon": "flask",
+        "icon_prefix": "fas"
+      },
+      {
+        "name": "CONSENSUS",
+        "url": "https://consensus.app/search/",
+        "icon": "microscope",
+        "icon_prefix": "fas"
+      },
+      {
+        "name": "LLM ARENA",
+        "url": "https://huggingface.co/spaces/lmarena-ai/chatbot-arena-leaderboard",
+        "icon": "crosshairs",
+        "icon_prefix": "fas"
+      },
+      {
+        "name": "XLS GEN",
+        "url": "https://app.formulabot.com/ai-tools/excel-formula-generator",
+        "icon": "file-excel",
+        "icon_prefix": "fas"
+      },
+      {
+        "name": "STREAMLIT",
+        "url": "https://share.streamlit.io/?aliId=eyJpIjoiXC85NlBzZDRPWWpxdURqelciLCJ0IjoiS2JYTllCMlBaM1BkR3Nra3JIS256QT09In0%253D",
+        "icon": "stream",
+        "icon_prefix": "fas"
+      },
+      {
+        "name": "GITHUB",
+        "url": "https://github.com/copilot?utm_source=github&utm_medium=banner&utm_campaign=copilotfree-bannerdashboard",
+        "icon": "github",
+        "icon_prefix": "fab"
+      },
+      {
+        "name": "GEEKFORGEEK.ORG",
+        "url": "https://www.geeksforgeeks.org/",
+        "icon": "glasses",
+        "icon_prefix": "fas"
+      }
+    ]
+  },
+  {
+    "name": "WEB.SYS & DATA",
+    "items": [
+      {
+        "name": "SALMONDATA",
+        "url": "https://salmondata.solmat.cl/",
+        "icon": "fish",
+        "icon_prefix": "fas"
+      },
+      {
+        "name": "GTASK",
+        "url": "https://gtask.solmat.cl/tareas",
+        "icon": "rocket",
+        "icon_prefix": "fas"
+      },
+      {
+        "name": "ECTO",
+        "url": "https://app.ecto.com/auth/login",
+        "icon": "tint",
+        "icon_prefix": "fas"
+      },
+      {
+        "name": "JIRA DQ",
+        "url": "https://solmatdevs.atlassian.net/servicedesk/customer/portals",
+        "icon": "ticket-alt",
+        "icon_prefix": "fas"
+      },
+      {
+        "name": "ONEDRIVE",
+        "url": "https://onedrive.live.com/?id=root&cid=4DD4E44DA1F1660E&qt=mru",
+        "icon": "cloud",
+        "icon_prefix": "fas"
+      },
+      {
+        "name": "CAMANDATA",
+        "url": "https://gfs.geminus-qhom.com/camandata/login.html",
+        "icon": "database",
+        "icon_prefix": "fas"
+      },
+      {
+        "name": "SIGESCAP",
+        "url": "https://sigescapcamanchaca.cl/",
+        "icon": "graduation-cap",
+        "icon_prefix": "fas"
+      },
+      {
+        "name": "KONTALI",
+        "url": "https://edge.kontali.com/?redirectedFrom=/home",
+        "icon": "industry",
+        "icon_prefix": "fas"
+      },
+      {
+        "name": "GIS-CAM",
+        "url": "https://gis.camanchaca.cl/lizmap/index.php/view/map?repository=camanchaca&project=camanchaca#-75.799485,-44.849695,-71.236034,-43.441029|Propias,CCAA,Centroides,M%C3%B3dulos|,,predeterminado,predeterminado|1,1,1,1",
+        "icon": "map-marker-alt",
+        "icon_prefix": "fas"
+      },
+      {
+        "name": " INDUSTRIA",
+        "url": "https://mapas.subpesca.cl/ideviewer/",
+        "icon": "map-marked-alt",
+        "icon_prefix": "fas"
+      },
+      {
+        "name": "150ppb",
+        "url": "https://150ppb-planningandquality.streamlit.app/",
+        "icon": "shield-virus",
+        "icon_prefix": "fas"
+      }
+    ]
+  },
+  {
+    "name": "AI GEN",
+    "items": [
+      {
+        "name": "Blackbox",
+        "url": "https://www.blackbox.ai/",
+        "icon": "",
+        "icon_prefix": ""
+      },
+      {
+        "name": "ChatGPT",
+        "url": "https://chatgpt.com/",
+        "icon": "code",
+        "icon_prefix": "fas"
+      },
+      {
+        "name": "Claude",
+        "url": "https://claude.ai/new",
+        "icon": "github",
+        "icon_prefix": "fab"
+      },
+      {
+        "name": "Perplexity",
+        "url": "https://www.perplexity.ai/",
+        "icon": "",
+        "icon_prefix": ""
+      },
+      {
+        "name": "MISTRAL",
+        "url": "https://chat.mistral.ai/chat",
+        "icon": "",
+        "icon_prefix": ""
+      },
+      {
+        "name": "DEEP SEEK",
+        "url": "https://chat.deepseek.com/",
+        "icon": "",
+        "icon_prefix": ""
+      },
+      {
+        "name": "GROK",
+        "url": "https://grok.com/",
+        "icon": "",
+        "icon_prefix": ""
+      },
+      {
+        "name": "lmarena.ai",
+        "url": "https://lmarena.ai/",
+        "icon": "",
+        "icon_prefix": ""
+      },
+      {
+        "name": "Gemini",
+        "url": "https://gemini.google.com/u/1/app",
+        "icon": "",
+        "icon_prefix": ""
+      },
+      {
+        "name": "Meta",
+        "url": "https://www.meta.ai/",
+        "icon": "",
+        "icon_prefix": ""
+      },
+      {
+        "name": "Llamacoder",
+        "url": "https://llamacoder.together.ai/",
+        "icon": "",
+        "icon_prefix": ""
+      }
+    ]
+  },
+  {
+    "name": "TOOLS",
+    "items": [
+      {
+        "name": "WOLFRAM",
+        "url": "https://www.wolframalpha.com/",
+        "icon": "globe",
+        "icon_prefix": "fas"
+      },
+      {
+        "name": "VCARD QR",
+        "url": "https://app.qrcode-tiger.com/?type=Vcard",
+        "icon": "qrcode",
+        "icon_prefix": "fas"
+      },
+      {
+        "name": "AQ_EXCHANGE",
+        "url": "https://aquainfoexchange.org/welcome/",
+        "icon": "external-link-alt",
+        "icon_prefix": "fas"
+      },
+      {
+        "name": "SEA LEVEL",
+        "url": "https://www.ioc-sealevelmonitoring.org/map.php",
+        "icon": "anchor",
+        "icon_prefix": "fas"
+      },
+      {
+        "name": "CLICKUP",
+        "url": "https://app.clickup.com/9013480669/v/l/8ckxk6x-253",
+        "icon": "calendar-check",
+        "icon_prefix": "fas"
+      },
+      {
+        "name": "MS DESIGNER",
+        "url": "https://designer.microsoft.com/",
+        "icon": "pen-nib",
+        "icon_prefix": "fas"
+      },
+      {
+        "name": "CANVA",
+        "url": "https://www.canva.com/",
+        "icon": "pen-nib",
+        "icon_prefix": "fas"
+      },
+      {
+        "name": "GAMMA",
+        "url": "https://gamma.app/create",
+        "icon": "fly",
+        "icon_prefix": "fab"
+      },
+      {
+        "name": "MAPIFY",
+        "url": "https://mapify.so/es/app/new",
+        "icon": "map-marked",
+        "icon_prefix": "fas"
+      },
+      {
+        "name": "DIAGRAM",
+        "url": "https://app.diagrams.net/",
+        "icon": "project-diagram",
+        "icon_prefix": "fas"
+      },
+      {
+        "name": "INSTAGANTT",
+        "url": "https://app.instagantt.com/r",
+        "icon": "tasks",
+        "icon_prefix": "fas"
+      },
+      {
+        "name": "NAPKIN",
+        "url": "https://app.napkin.ai/page/CgoiCHByb2Qtb25lEiwKBFBhZ2UaJDE0NzVkMWJjLTU1NmUtNDNkYS1hNTYzLTdiNjkyMDg5NmNkMw?tid=onboarding_gen_ai_1&ts=Prompt",
+        "icon": "object-group",
+        "icon_prefix": "fas"
+      },
+      {
+        "name": "RAPHAEL APP",
+        "url": "https://raphael.app/es",
+        "icon": "file-image",
+        "icon_prefix": "fas"
+      },
+      {
+        "name": "GOOGLE NOTEBOOK LM",
+        "url": "https://notebooklm.google.com/?_gl=1*17jqiqz*_ga*MTczNTI5NDQ2OS4xNzQ1MjY1MjM5*_ga_W0LDH41ZCB*MTc0NTI2NTIzOC4xLjEuMTc0NTI2NTQwMi42MC4wLjA.",
+        "icon": "google-plus",
+        "icon_prefix": "fab"
+      },
+      {
+        "name": "GOOGLE AI STUDIO",
+        "url": "https://aistudio.google.com/u/2/prompts/new_chat?pli=1",
+        "icon": "brain",
+        "icon_prefix": "fas"
+      },
+      {
+        "name": "RUNWAY",
+        "url": "https://app.runwayml.com/video-tools/teams/msoto68/dashboard",
+        "icon": "photo-video",
+        "icon_prefix": "fas"
+      },
+      {
+        "name": "INFOGRAPHY",
+        "url": "https://app.infography.in/",
+        "icon": "file-alt",
+        "icon_prefix": "fas"
+      },
+      {
+        "name": "PDF -> PPT",
+        "url": "https://www.presentations.ai/",
+        "icon": "file-pdf",
+        "icon_prefix": "fas"
+      },
+      {
+        "name": "NERD",
+        "url": "https://www.nerd.lat/",
+        "icon": "glasses",
+        "icon_prefix": "fas"
+      },
+      {
+        "name": "THEREASNAI",
+        "url": "https://theresanaiforthat.com/setup/",
+        "icon": "book-dead",
+        "icon_prefix": "fas"
+      }
+    ]
+  }
+];
+        
+        function renderGrupos() {
+            const contenedor = document.getElementById('contenedor');
+            grupos.forEach(grupo => {
+                const divGrupo = document.createElement('div');
+                divGrupo.className = 'grupo';
+                divGrupo.innerHTML = '<h2>' + grupo.name + '</h2>';
+                
+                const divLinks = document.createElement('div');
+                divLinks.className = 'links';
+                
+                grupo.items.forEach(item => {
+                    const card = document.createElement('div');
+                    card.className = 'link-card';
+                    
+                    let iconHtml = item.icon ? 
+                        '<i class="' + item.icon_prefix + ' fa-' + item.icon + ' icon"></i>' : 
+                        '<span class="icon">🔗</span>';
+                    
+                    card.innerHTML = iconHtml +
+                        '<a class="link-name" href="' + item.url + '" target="_blank">' + item.name + '</a>';
+                    
+                    divLinks.appendChild(card);
+                });
+                
+                divGrupo.appendChild(divLinks);
+                contenedor.appendChild(divGrupo);
+            });
+        }
+        
+        renderGrupos();
+    </script>
 </body>
 </html>
