@@ -1,4 +1,4 @@
-# Mi NightTab Web
+# Mi  Web
 
 Una versión web de la extensión NightTab para organizar tus enlaces favoritos, accesible desde cualquier dispositivo.
 
