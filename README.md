@@ -1,6 +1,6 @@
 # Mi  Web
 
-Una versión web de la extensión NightTab para organizar tus enlaces favoritos, accesible desde cualquier dispositivo.
+Una versión web de la extensión personal para organizar tus enlaces favoritos, accesible desde cualquier dispositivo.
 
 ## Características
 
