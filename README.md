@@ -23,7 +23,7 @@ Una versión web de la extensión personal para organizar tus enlaces favoritos,
 2. Sube los archivos `index.html` y `nighttab.js`
 3. Ve a Settings > Pages en tu repositorio
 4. Selecciona "Deploy from a branch" y elige "main"
-5. Tu página estará disponible en `https://tu-usuario.github.io/nombre-repositorio`
+5. Tu página estará disponible en `https://majedo.github.io/mypanel`
 
 ## Personalización
 
