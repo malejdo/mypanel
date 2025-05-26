@@ -48,4 +48,4 @@ https://fontawesome.com/icons
 
 ---
 
-Creado a partir de la configuración exportada de NightTab
+Creado a partir de la configuración exportada de NightTab 25.05.25
