@@ -1,139 +1,218 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<link href="./flavicon.png?v=20260427" rel="icon" type="image/png"/>
-<link href="./flavicon.png?v=20260427" rel="shortcut icon" type="image/png"/>
-<link href="./flavicon.png?v=20260427" rel="apple-touch-icon" type="image/png"/>
-<title>Links Panel msoto</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de Inicio - Dashboard</title>
+    <style>
+        :root {
+            --bg-color: #0f172a;
+            --card-bg: #1e293b;
+            --accent-color: #38bdf8;
+            --text-color: #f8fafc;
+            --text-muted: #94a3b8;
+        }
 
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet"/>
-<style>
-:root{--bg-primary:#1f2227;--bg-secondary:#2a2f36;--accent:#111418;--highlight:#e6e6e6;--text:#eaeaea;--text-muted:#aeb4bd;--card-border:#3a4049}
-*{box-sizing:border-box}
-body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,sans-serif;background:var(--bg-primary);color:var(--text);min-height:100vh;margin:0;padding:24px}
-.header{display:flex;align-items:center;justify-content:center;gap:16px;margin:0 auto 32px auto;max-width:1100px}
-.header-icon{width:40px;height:40px;border-radius:10px;background:#000;box-shadow:0 2px 8px rgba(0,0,0,.35)}
-.header h1{color:var(--highlight);font-size:28px;margin:0;font-weight:700;letter-spacing:.5px}
-.container{max-width:1100px;margin:0 auto;display:grid;gap:18px}
-.grupo{background:var(--bg-secondary);border:1px solid var(--card-border);border-radius:14px;padding:14px 12px}
-.grupo h2{color:var(--highlight);font-size:14px;margin:0 0 10px 0;text-align:center;text-transform:uppercase;letter-spacing:1.6px;border-bottom:1px solid var(--card-border);padding-bottom:8px}
-.links{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:12px}
-.link-card{background:var(--accent);border:1px solid var(--card-border);border-radius:12px;padding:14px 10px;display:flex;flex-direction:column;align-items:center;gap:8px;min-height:110px;transition:transform .12s ease, box-shadow .12s ease, border-color .12s ease;cursor:pointer}
-.link-card:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,0,0,.25);border-color:#6c7a89}
-.icon{font-size:22px;color:#b9cdf2}
-.link-name{color:var(--text);font-size:14px;line-height:1.2;text-align:center}
-.link-url{position:absolute;left:-9999px;top:auto;width:1px;height:1px;overflow:hidden}
-.ai-gen-card{justify-content:center;font-size:20px;font-weight:700;letter-spacing:.4px;text-transform:lowercase}
-.link-card a{color:inherit;text-decoration:none}
-.footer{max-width:1100px;margin:24px auto 0 auto;text-align:center;color:var(--text-muted);font-size:12px}
-</style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 2rem;
+        }
+
+        h1 {
+            text-align: center;
+            color: var(--accent-color);
+            margin-bottom: 2rem;
+        }
+
+        .dashboard {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+
+        .group-card {
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+
+        .group-card h2 {
+            font-size: 1.25rem;
+            margin-top: 0;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--accent-color);
+            color: var(--accent-color);
+        }
+
+        .link-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .link-item a {
+            display: block;
+            color: var(--text-color);
+            text-decoration: none;
+            padding: 0.5rem 0.75rem;
+            border-radius: 6px;
+            transition: background-color 0.2s ease, color 0.2s ease;
+            font-size: 0.9rem;
+            word-break: break-all;
+        }
+
+        .link-item a:hover {
+            background-color: var(--accent-color);
+            color: var(--bg-color);
+            font-weight: 600;
+        }
+    </style>
 </head>
 <body>
-<header class="header" role="banner">
-  <img alt="icono" class="header-icon" height="40" onerror="this.onerror=null;this.src='https://malejdo.github.io/mypanel/flavicon.png?v=20260427';" src="./flavicon.png?v=20260427" width="40"/>
-  <h1>Links Panel msoto</h1>
-</header>
-<main class="container" id="contenedor" role="main"></main>
-<footer class="footer">Design by MSOTO</footer>
 
-<script>
-var grupos = [
-  {
-    "name": "DATA SCIENCE",
-    "items": [
-      { "name": "JULIUS AI", "url": "https://julius.ai/chat", "icon": "medapps", "icon_prefix": "fab" },
-      { "name": "JULIUS COMUNNITY", "url": "https://community.julius.ai/", "icon": "users", "icon_prefix": "fas" },
-      { "name": "JUPYTER", "url": "http://localhost:8889/tree", "icon": "code", "icon_prefix": "fas" },
-      { "name": "DATABRICKS", "url": "https://community.cloud.databricks.com/?o=3451059260214446", "icon": "file-code", "icon_prefix": "fas" },
-      { "name": "COLAB", "url": "https://colab.research.google.com/", "icon": "google-plus-square", "icon_prefix": "fab" },
-      { "name": "STREAMLIT", "url": "https://share.streamlit.io/?aliId=eyJpIjoiXC85NlBzZDRPWWpxdURqelciLCJ0IjoiS2JYTllCMlBaM1BkR3Nra3JIS256QT09In0%253D", "icon": "mobile", "icon_prefix": "fas" },
-      { "name": "RENDER", "url": "https://dashboard.render.com/", "icon": "draw-polygon", "icon_prefix": "fas" },
-      { "name": "GITHUB", "url": "https://github.com/", "icon": "github", "icon_prefix": "fab" },
-      { "name": "GITLAB", "url": "https://gitlab.com/malejdo/", "icon": "gitlab", "icon_prefix": "fab" }
-    ]
-  },
-  {
-    "name": "AI GEN",
-    "items": [
-      { "name": "ChatGPT", "url": "https://chatgpt.com/", "icon": "robot", "icon_prefix": "fas" },
-      { "name": "Claude", "url": "https://claude.ai/", "icon": "brain", "icon_prefix": "fas" },
-      { "name": "Gemini", "url": "https://gemini.google.com/", "icon": "sparkles", "icon_prefix": "fas" },
-      { "name": "Perplexity", "url": "https://www.perplexity.ai/", "icon": "search", "icon_prefix": "fas" },
-      { "name": "DeepSeek", "url": "https://chat.deepseek.com/", "icon": "microchip", "icon_prefix": "fas" },
-      { "name": "Manus AI", "url": "https://manus.im/", "icon": "magic", "icon_prefix": "fas" },
-      { "name": "Grok", "url": "https://grok.com/", "icon": "terminal", "icon_prefix": "fas" }
-    ]
-  },
-  {
-    "name": "WEB.SYS & DATA",
-    "items": [
-      { "name": "GMAIL", "url": "https://mail.google.com/mail/u/0/#inbox", "icon": "envelope", "icon_prefix": "fas" },
-      { "name": "CALENDAR", "url": "https://calendar.google.com/calendar/u/0/r", "icon": "calendar-day", "icon_prefix": "fas" },
-      { "name": "MIRO", "url": "https://miro.com/app/board/uXjVGv_NrjA=/", "icon": "clipboard", "icon_prefix": "fas" },
-      { "name": "SALMONDATA", "url": "https://salmondata.solmat.cl/", "icon": "fish", "icon_prefix": "fas" },
-      { "name": "CALIDAD E INOCUIDAD", "url": "https://muestreo-peces.solmat.cl/", "icon": "award", "icon_prefix": "fas" },
-      { "name": "GTASK", "url": "https://gtask.solmat.cl/tareas", "icon": "rocket", "icon_prefix": "fas" },
-      { "name": "PredOTC app", "url": "https://otc-prediccion.onrender.com/", "icon": "flask", "icon_prefix": "fas" },
-      { "name": "TRAVEL", "url": "https://travelsecurity.kontroltravel.com/default.aspx", "icon": "plane-departure", "icon_prefix": "fas" },
-      { "name": "BUK", "url": "https://camanchaca.buk.cl/users/sign_in", "icon": "user-cog", "icon_prefix": "fas" },
-      { "name": "RINDEGASTOS", "url": "https://auth.rindegastos.com/signin", "icon": "file-invoice-dollar", "icon_prefix": "fas" },
-      { "name": "PRIMARIA", "url": "http://192.168.54.122:8501/", "icon": "industry", "icon_prefix": "fas" },
-      { "name": "LYTHIUM", "url": "http://10.8.70.2:3000/d/suKpC1fZz12/dashboard-evaluador-camanchaca-red?orgId=1&refresh=%201s", "icon": "stream", "icon_prefix": "fas" },
-      { "name": "GTR", "url": "https://www.gtrgestion.cl/login", "icon": "check-double", "icon_prefix": "fas" },
-      { "name": "POWER BI SERVICE", "url": "https://app.powerbi.com/home?experience=power-bi", "icon": "microsoft", "icon_prefix": "fab" }
-    ]
-  }
-];
+    <h1>Panel de Accesos Directos</h1>
 
-function renderGrupos(){
-  const contenedor=document.getElementById('contenedor');
-  grupos.forEach(grupo=>{
-    const section=document.createElement('section');
-    section.className='grupo';
-    section.setAttribute('data-name',grupo.name);
-    section.innerHTML='<h2>'+grupo.name+'</h2>';
-    const grid=document.createElement('div');
-    grid.className='links';
-    (grupo.items||[]).forEach(item=>{
-      const card=document.createElement('article');
-      card.className='link-card';
-      card.setAttribute('data-url', item.url || '#');
-      const prefix=item.icon_prefix || 'fas';
-      const icon=item.icon || 'link';
-      const safeName=item.name? item.name : '';
-      const safeUrl=item.url? item.url : '#';
-      if(grupo.name==='AI GEN'){
-        card.classList.add('ai-gen-card');
-        card.innerHTML='<div class="link-name">'+safeName.toLowerCase()+'</div>'+'<a class="link-url" href="'+safeUrl+'" target="_blank" rel="noopener noreferrer">'+safeUrl+'</a>';
-      }else{
-        const iconHtml='<i class="'+prefix+' fa-'+icon+' icon" aria-hidden="true"></i>';
-        card.innerHTML=iconHtml+'<div class="link-name">'+safeName+'</div>'+'<a class="link-url" href="'+safeUrl+'" target="_blank" rel="noopener noreferrer">'+safeUrl+'</a>';
-      }
-      card.addEventListener('click', function(e){
-        if(e.target && e.target.tagName.toLowerCase()==='a'){return}
-        window.open(safeUrl,'_blank');
-      });
-      grid.appendChild(card);
-    });
-    section.appendChild(grid);
-    contenedor.appendChild(section);
-  });
-}
-renderGrupos();
-</script>
-</body>
-</html>
-      });
-      grid.appendChild(card);
-    });
-    section.appendChild(grid);
-    contenedor.appendChild(section);
-  });
-}
-renderGrupos();
-</script>
+    <div class="dashboard">
+
+        <!-- 1. DATA SCIENCE -->
+        <div class="group-card">
+            <h2>1. DATA SCIENCE</h2>
+            <ul class="link-list">
+                <li class="link-item"><a href="https://julius.ai/chat" target="_blank" rel="noopener">JULIUS AI</a></li>
+                <li class="link-item"><a href="https://community.julius.ai/" target="_blank" rel="noopener">JULIUS COMUNNITY</a></li>
+                <li class="link-item"><a href="http://localhost:8889/tree" target="_blank" rel="noopener">JUPYTER</a></li>
+                <li class="link-item"><a href="https://community.cloud.databricks.com/?o=3451059260214446" target="_blank" rel="noopener">DATABRICKS</a></li>
+                <li class="link-item"><a href="https://colab.research.google.com/" target="_blank" rel="noopener">COLAB</a></li>
+                <li class="link-item"><a href="https://share.streamlit.io/" target="_blank" rel="noopener">STREAMLIT</a></li>
+                <li class="link-item"><a href="https://dashboard.render.com/" target="_blank" rel="noopener">RENDER</a></li>
+                <li class="link-item"><a href="https://github.com/" target="_blank" rel="noopener">GITHUB</a></li>
+                <li class="link-item"><a href="https://gitlab.com/malejdo/" target="_blank" rel="noopener">GITLAB</a></li>
+            </ul>
+        </div>
+
+        <!-- 2. WEB SYS & DATA -->
+        <div class="group-card">
+            <h2>2. WEB SYS & DATA</h2>
+            <ul class="link-list">
+                <li class="link-item"><a href="https://mail.google.com/mail/u/0/#inbox" target="_blank" rel="noopener">GMAIL</a></li>
+                <li class="link-item"><a href="https://calendar.google.com/calendar/u/0/r" target="_blank" rel="noopener">CALENDAR</a></li>
+                <li class="link-item"><a href="https://miro.com/app/board/uXjVGv_NrjA=/" target="_blank" rel="noopener">MIRO</a></li>
+                <li class="link-item"><a href="https://salmondata.solmat.cl/" target="_blank" rel="noopener">SALMONDATA</a></li>
+                <li class="link-item"><a href="https://muestreo-peces.solmat.cl/" target="_blank" rel="noopener">CALIDAD E INOCUIDAD</a></li>
+                <li class="link-item"><a href="https://gtask.solmat.cl/tareas" target="_blank" rel="noopener">GTASK</a></li>
+                <li class="link-item"><a href="https://otc-prediccion.onrender.com/" target="_blank" rel="noopener">PredOTC app</a></li>
+                <li class="link-item"><a href="https://travelsecurity.kontroltravel.com/default.aspx" target="_blank" rel="noopener">TRAVEL</a></li>
+                <li class="link-item"><a href="https://camanchaca.buk.cl/users/sign_in" target="_blank" rel="noopener">BUK</a></li>
+                <li class="link-item"><a href="https://auth.rindegastos.com/signin" target="_blank" rel="noopener">RINDEGASTOS</a></li>
+                <li class="link-item"><a href="http://192.168.54.122:8501/" target="_blank" rel="noopener">PRIMARIA</a></li>
+                <li class="link-item"><a href="http://10.8.70.2:3000/d/suKpC1fZz12/dashboard-evaluador-camanchaca-red?orgId=1&refresh=%201s" target="_blank" rel="noopener">LYTHIUM</a></li>
+                <li class="link-item"><a href="https://www.gtrgestion.cl/login" target="_blank" rel="noopener">GTR</a></li>
+                <li class="link-item"><a href="https://app.powerbi.com/home?experience=power-bi" target="_blank" rel="noopener">POWER BI SERVICE</a></li>
+                <li class="link-item"><a href="https://software.scaleaq.com/Camanchaca/AquaFarmer/#/loginOAuth" target="_blank" rel="noopener">AFA</a></li>
+                <li class="link-item"><a href="http://192.168.2.6/Camanchaca/AquaFUTUREMar/" target="_blank" rel="noopener">AFU</a></li>
+                <li class="link-item"><a href="https://ecc.camanchaca.cl/sap/bc/gui/sap/its/webgui?sap-client=300#" target="_blank" rel="noopener">SAP</a></li>
+                <li class="link-item"><a href="https://app.ecto.com/auth/login" target="_blank" rel="noopener">ECTO</a></li>
+                <li class="link-item"><a href="https://solmatdevs.atlassian.net/servicedesk/customer/portals" target="_blank" rel="noopener">JIRA DQ</a></li>
+                <li class="link-item"><a href="https://onedrive.live.com/" target="_blank" rel="noopener">ONEDRIVE</a></li>
+                <li class="link-item"><a href="https://gfs.geminus-qhom.com/camandata/login.html" target="_blank" rel="noopener">CAMANDATA</a></li>
+                <li class="link-item"><a href="https://sigescapcamanchaca.cl/" target="_blank" rel="noopener">SIGESCAP</a></li>
+                <li class="link-item"><a href="https://gis.camanchaca.cl/lizmap/index.php/view/map?repository=camanchaca&project=camanchaca" target="_blank" rel="noopener">GIS-CAM</a></li>
+                <li class="link-item"><a href="https://mapas.subpesca.cl/ideviewer/" target="_blank" rel="noopener">MAPA SUBP</a></li>
+                <li class="link-item"><a href="https://sisvet.solmat.cl/accounts/login/?next=/" target="_blank" rel="noopener">SISVET</a></li>
+                <li class="link-item"><a href="https://drive.google.com/drive/u/0/my-drive" target="_blank" rel="noopener">GOOGLE DRIVE</a></li>
+                <li class="link-item"><a href="https://pasaportepetrohue.solmat.cl/admin/app/passport/" target="_blank" rel="noopener">PH QR PP</a></li>
+                <li class="link-item"><a href="https://water.ecto.com/Petrohue" target="_blank" rel="noopener">RIL PH</a></li>
+                <li class="link-item"><a href="https://keep.google.com/u/0/" target="_blank" rel="noopener">KEEP</a></li>
+                <li class="link-item"><a href="https://jmaureira.shinyapps.io/proyecto_app_caligus/" target="_blank" rel="noopener">AI_SALUD</a></li>
+                <li class="link-item"><a href="https://app.salmobench.com/" target="_blank" rel="noopener">AQUABENCH</a></li>
+                <li class="link-item"><a href="https://edge.kontali.com/?redirectedFrom=/home" target="_blank" rel="noopener">KONTALI</a></li>
+                <li class="link-item"><a href="https://manolinaqua.com/guides-and-reports-downloads" target="_blank" rel="noopener">MANOLIN</a></li>
+                <li class="link-item"><a href="https://malejdo.github.io/mypanel/" target="_blank" rel="noopener">LINKS MSOTO</a></li>
+                <li class="link-item"><a href="https://camanchacasa.freshservice.com/support/tickets/" target="_blank" rel="noopener">TICKET TI</a></li>
+            </ul>
+        </div>
+
+        <!-- 3. AI GEN -->
+        <div class="group-card">
+            <h2>3. AI GEN</h2>
+            <ul class="link-list">
+                <li class="link-item"><a href="https://www.meta.ai/" target="_blank" rel="noopener">META</a></li>
+                <li class="link-item"><a href="https://gemini.google.com/u/1/app" target="_blank" rel="noopener">GEMINI</a></li>
+                <li class="link-item"><a href="https://chatgpt.com/" target="_blank" rel="noopener">CHATGPT</a></li>
+                <li class="link-item"><a href="https://cursor.com/agents" target="_blank" rel="noopener">CURSOR</a></li>
+                <li class="link-item"><a href="https://www.blackbox.ai/" target="_blank" rel="noopener">BLACKBOX</a></li>
+                <li class="link-item"><a href="https://www.perplexity.ai/" target="_blank" rel="noopener">PERPLEXITY</a></li>
+                <li class="link-item"><a href="https://claude.ai/new" target="_blank" rel="noopener">CLAUDE</a></li>
+                <li class="link-item"><a href="https://chat.mistral.ai/chat" target="_blank" rel="noopener">MISTRAL</a></li>
+                <li class="link-item"><a href="https://grok.com/" target="_blank" rel="noopener">GROK</a></li>
+                <li class="link-item"><a href="https://lmarena.ai/" target="_blank" rel="noopener">LMARENA</a></li>
+                <li class="link-item"><a href="https://llamacoder.together.ai/" target="_blank" rel="noopener">LLAMA (Llamacoder)</a></li>
+            </ul>
+        </div>
+
+        <!-- 4. TOOLS -->
+        <div class="group-card">
+            <h2>4. TOOLS</h2>
+            <ul class="link-list">
+                <li class="link-item"><a href="https://www.wolframalpha.com/" target="_blank" rel="noopener">WOLFRAM</a></li>
+                <li class="link-item"><a href="https://app.qrcode-tiger.com/?type=Vcard" target="_blank" rel="noopener">VCARD QR</a></li>
+                <li class="link-item"><a href="https://aquainfoexchange.org/welcome/" target="_blank" rel="noopener">AQ_EXCHANGE</a></li>
+                <li class="link-item"><a href="https://www.ioc-sealevelmonitoring.org/map.php" target="_blank" rel="noopener">SEA LEVEL</a></li>
+                <li class="link-item"><a href="https://app.clickup.com/9013480669/v/l/8ckxk6x-253" target="_blank" rel="noopener">CLICKUP</a></li>
+                <li class="link-item"><a href="https://designer.microsoft.com/" target="_blank" rel="noopener">MS DESIGNER</a></li>
+                <li class="link-item"><a href="https://www.canva.com/" target="_blank" rel="noopener">CANVA</a></li>
+                <li class="link-item"><a href="https://gamma.app/create" target="_blank" rel="noopener">GAMMA</a></li>
+                <li class="link-item"><a href="https://notebooklm.google.com/" target="_blank" rel="noopener">GOOGLE NOTEBOOK LM</a></li>
+                <li class="link-item"><a href="https://mapify.so/es/app/new" target="_blank" rel="noopener">MAPIFY</a></li>
+                <li class="link-item"><a href="https://app.diagrams.net/" target="_blank" rel="noopener">DIAGRAM</a></li>
+                <li class="link-item"><a href="https://app.instagantt.com/r" target="_blank" rel="noopener">INSTAGANTT</a></li>
+                <li class="link-item"><a href="https://app.napkin.ai/" target="_blank" rel="noopener">NAPKIN</a></li>
+                <li class="link-item"><a href="https://raphael.app/es" target="_blank" rel="noopener">RAPHAEL APP</a></li>
+                <li class="link-item"><a href="https://aistudio.google.com/u/2/prompts/new_chat?pli=1" target="_blank" rel="noopener">GOOGLE AI STUDIO</a></li>
+                <li class="link-item"><a href="https://app.runwayml.com/" target="_blank" rel="noopener">RUNWAY</a></li>
+                <li class="link-item"><a href="https://app.infography.in/" target="_blank" rel="noopener">INFOGRAPHY</a></li>
+                <li class="link-item"><a href="https://www.presentations.ai/" target="_blank" rel="noopener">PDF -> PPT</a></li>
+                <li class="link-item"><a href="https://www.nerd.lat/" target="_blank" rel="noopener">NERD</a></li>
+                <li class="link-item"><a href="https://theresanaiforthat.com/setup/" target="_blank" rel="noopener">THEREASNAI</a></li>
+                <li class="link-item"><a href="https://app.pfpmaker.com/" target="_blank" rel="noopener">PFPMAKER</a></li>
+                <li class="link-item"><a href="https://www.windy.com/" target="_blank" rel="noopener">WINDY</a></li>
+                <li class="link-item"><a href="https://resizepng.com/" target="_blank" rel="noopener">RESIZE PNGs</a></li>
+                <li class="link-item"><a href="https://agromet.cl/" target="_blank" rel="noopener">AGROMET</a></li>
+                <li class="link-item"><a href="#" target="_blank" rel="noopener">BIG ART</a></li>
+            </ul>
+        </div>
+
+        <!-- 5. INFO & APP'S -->
+        <div class="group-card">
+            <h2>5. INFO & APP'S</h2>
+            <ul class="link-list">
+                <li class="link-item"><a href="https://www.genesys-pgr.org/" target="_blank" rel="noopener">GENESYS-PGR.ORG</a></li>
+                <li class="link-item"><a href="https://scispace.com/" target="_blank" rel="noopener">SCISPACE</a></li>
+                <li class="link-item"><a href="https://consensus.app/" target="_blank" rel="noopener">CONSENSUS</a></li>
+                <li class="link-item"><a href="https://onlinelibrary.wiley.com/" target="_blank" rel="noopener">WILEY</a></li>
+                <li class="link-item"><a href="https://www.researchgate.net/" target="_blank" rel="noopener">RESEARCHGATE</a></li>
+                <li class="link-item"><a href="https://satto.cl/" target="_blank" rel="noopener">SATTO</a></li>
+                <li class="link-item"><a href="https://pngs.com/" target="_blank" rel="noopener">PNGs</a></li>
+                <li class="link-item"><a href="https://css-grid-generator.netlify.app/" target="_blank" rel="noopener">CSS GRID GEN</a></li>
+                <li class="link-item"><a href="https://umami.is/" target="_blank" rel="noopener">UMAMI</a></li>
+                <li class="link-item"><a href="https://www.windy.com/" target="_blank" rel="noopener">WINDY</a></li>
+                <li class="link-item"><a href="https://translate.google.com/" target="_blank" rel="noopener">TRANSLATOR</a></li>
+                <li class="link-item"><a href="https://www.linkedin.com/" target="_blank" rel="noopener">LINKEDIN</a></li>
+            </ul>
+        </div>
+
+    </div>
+
 </body>
 </html>
 </html>
