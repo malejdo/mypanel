@@ -3,216 +3,244 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Panel de Inicio - Dashboard</title>
+    <title>nightTab Dashboard</title>
+    <!-- Cargamos la librería de íconos Lucide -->
+    <script src="https://unpkg.com/lucide@latest"></script>
     <style>
         :root {
-            --bg-color: #0f172a;
-            --card-bg: #1e293b;
-            --accent-color: #38bdf8;
-            --text-color: #f8fafc;
-            --text-muted: #94a3b8;
+            --bg-color: #0d2251;
+            --accent-orange: #ff7900;
+            --text-color: #ffffff;
+            --card-bg: rgba(255, 255, 255, 0.05);
+            --card-hover: rgba(255, 255, 255, 0.15);
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             background-color: var(--bg-color);
             color: var(--text-color);
             margin: 0;
-            padding: 2rem;
+            padding: 20px;
+            box-sizing: border-box;
+            min-height: 100vh;
         }
 
-        h1 {
-            text-align: center;
-            color: var(--accent-color);
-            margin-bottom: 2rem;
-        }
-
-        .dashboard {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 1.5rem;
-            max-width: 1600px;
-            margin: 0 auto;
-        }
-
-        .group-card {
-            background-color: var(--card-bg);
-            border-radius: 12px;
-            padding: 1.5rem;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-        }
-
-        .group-card h2 {
-            font-size: 1.25rem;
-            margin-top: 0;
-            margin-bottom: 1rem;
-            padding-bottom: 0.5rem;
-            border-bottom: 2px solid var(--accent-color);
-            color: var(--accent-color);
-        }
-
-        .link-list {
-            list-style: none;
-            padding: 0;
-            margin: 0;
+        .dashboard-container {
             display: flex;
             flex-direction: column;
-            gap: 0.5rem;
+            gap: 25px;
+            max-width: 100%;
         }
 
-        .link-item a {
-            display: block;
-            color: var(--text-color);
+        .section-title {
+            color: var(--accent-orange);
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .grid-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .tile {
+            background-color: var(--card-bg);
+            border: 1px solid rgba(255, 121, 0, 0.2);
+            border-radius: 4px;
+            width: 70px;
+            height: 65px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
             text-decoration: none;
-            padding: 0.5rem 0.75rem;
-            border-radius: 6px;
-            transition: background-color 0.2s ease, color 0.2s ease;
-            font-size: 0.9rem;
-            word-break: break-all;
+            color: var(--text-color);
+            padding: 4px;
+            transition: all 0.2s ease;
+            box-sizing: border-box;
         }
 
-        .link-item a:hover {
-            background-color: var(--accent-color);
-            color: var(--bg-color);
-            font-weight: 600;
+        .tile:hover {
+            background-color: var(--card-hover);
+            border-color: var(--accent-orange);
+            transform: translateY(-2px);
+        }
+
+        .tile i, .tile svg {
+            width: 20px;
+            height: 20px;
+            color: var(--accent-orange);
+            margin-bottom: 6px;
+            stroke-width: 2;
+        }
+
+        .tile span {
+            font-size: 0.65rem;
+            font-weight: 700;
+            text-align: center;
+            line-height: 1.1;
+            max-width: 100%;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            color: #ffffff;
+            text-transform: uppercase;
+        }
+
+        .tile .subtitle {
+            font-size: 0.55rem;
+            font-weight: 400;
+            color: #a0aec0;
+            text-transform: none;
         }
     </style>
 </head>
 <body>
 
-    <h1>Panel de Accesos Directos</h1>
+<div class="dashboard-container">
 
-    <div class="dashboard">
-
-        <!-- 1. DATA SCIENCE -->
-        <div class="group-card">
-            <h2>1. DATA SCIENCE</h2>
-            <ul class="link-list">
-                <li class="link-item"><a href="https://julius.ai/chat" target="_blank" rel="noopener">JULIUS AI</a></li>
-                <li class="link-item"><a href="https://community.julius.ai/" target="_blank" rel="noopener">JULIUS COMUNNITY</a></li>
-                <li class="link-item"><a href="http://localhost:8889/tree" target="_blank" rel="noopener">JUPYTER</a></li>
-                <li class="link-item"><a href="https://community.cloud.databricks.com/?o=3451059260214446" target="_blank" rel="noopener">DATABRICKS</a></li>
-                <li class="link-item"><a href="https://colab.research.google.com/" target="_blank" rel="noopener">COLAB</a></li>
-                <li class="link-item"><a href="https://share.streamlit.io/" target="_blank" rel="noopener">STREAMLIT</a></li>
-                <li class="link-item"><a href="https://dashboard.render.com/" target="_blank" rel="noopener">RENDER</a></li>
-                <li class="link-item"><a href="https://github.com/" target="_blank" rel="noopener">GITHUB</a></li>
-                <li class="link-item"><a href="https://gitlab.com/malejdo/" target="_blank" rel="noopener">GITLAB</a></li>
-            </ul>
+    <!-- 1. DATA SCIENCE -->
+    <section>
+        <div class="section-title">DATA SCIENCE</div>
+        <div class="grid-container">
+            <a href="https://julius.ai/chat" target="_blank" class="tile"><i data-lucide="brain"></i><span>JULIUS AI</span></a>
+            <a href="https://community.julius.ai/" target="_blank" class="tile"><i data-lucide="users"></i><span>JULIUS</span><span class="subtitle">Community</span></a>
+            <a href="http://localhost:8889/tree" target="_blank" class="tile"><i data-lucide="code-2"></i><span>JUPYTER</span></a>
+            <a href="https://community.cloud.databricks.com/?o=3451059260214446" target="_blank" class="tile"><i data-lucide="database"></i><span>DATABRICKS</span></a>
+            <a href="https://colab.research.google.com/" target="_blank" class="tile"><i data-lucide="terminal"></i><span>COLAB</span></a>
+            <a href="https://share.streamlit.io/" target="_blank" class="tile"><i data-lucide="layout"></i><span>STREAMLIT</span></a>
+            <a href="https://dashboard.render.com/" target="_blank" class="tile"><i data-lucide="server"></i><span>RENDER</span></a>
+            <a href="https://github.com/" target="_blank" class="tile"><i data-lucide="github"></i><span>GITHUB</span></a>
+            <a href="https://gitlab.com/malejdo/" target="_blank" class="tile"><i data-lucide="gitlab"></i><span>GITLAB</span></a>
         </div>
+    </section>
 
-        <!-- 2. WEB SYS & DATA -->
-        <div class="group-card">
-            <h2>2. WEB SYS & DATA</h2>
-            <ul class="link-list">
-                <li class="link-item"><a href="https://mail.google.com/mail/u/0/#inbox" target="_blank" rel="noopener">GMAIL</a></li>
-                <li class="link-item"><a href="https://calendar.google.com/calendar/u/0/r" target="_blank" rel="noopener">CALENDAR</a></li>
-                <li class="link-item"><a href="https://miro.com/app/board/uXjVGv_NrjA=/" target="_blank" rel="noopener">MIRO</a></li>
-                <li class="link-item"><a href="https://salmondata.solmat.cl/" target="_blank" rel="noopener">SALMONDATA</a></li>
-                <li class="link-item"><a href="https://muestreo-peces.solmat.cl/" target="_blank" rel="noopener">CALIDAD E INOCUIDAD</a></li>
-                <li class="link-item"><a href="https://gtask.solmat.cl/tareas" target="_blank" rel="noopener">GTASK</a></li>
-                <li class="link-item"><a href="https://otc-prediccion.onrender.com/" target="_blank" rel="noopener">PredOTC app</a></li>
-                <li class="link-item"><a href="https://travelsecurity.kontroltravel.com/default.aspx" target="_blank" rel="noopener">TRAVEL</a></li>
-                <li class="link-item"><a href="https://camanchaca.buk.cl/users/sign_in" target="_blank" rel="noopener">BUK</a></li>
-                <li class="link-item"><a href="https://auth.rindegastos.com/signin" target="_blank" rel="noopener">RINDEGASTOS</a></li>
-                <li class="link-item"><a href="http://192.168.54.122:8501/" target="_blank" rel="noopener">PRIMARIA</a></li>
-                <li class="link-item"><a href="http://10.8.70.2:3000/d/suKpC1fZz12/dashboard-evaluador-camanchaca-red?orgId=1&refresh=%201s" target="_blank" rel="noopener">LYTHIUM</a></li>
-                <li class="link-item"><a href="https://www.gtrgestion.cl/login" target="_blank" rel="noopener">GTR</a></li>
-                <li class="link-item"><a href="https://app.powerbi.com/home?experience=power-bi" target="_blank" rel="noopener">POWER BI SERVICE</a></li>
-                <li class="link-item"><a href="https://software.scaleaq.com/Camanchaca/AquaFarmer/#/loginOAuth" target="_blank" rel="noopener">AFA</a></li>
-                <li class="link-item"><a href="http://192.168.2.6/Camanchaca/AquaFUTUREMar/" target="_blank" rel="noopener">AFU</a></li>
-                <li class="link-item"><a href="https://ecc.camanchaca.cl/sap/bc/gui/sap/its/webgui?sap-client=300#" target="_blank" rel="noopener">SAP</a></li>
-                <li class="link-item"><a href="https://app.ecto.com/auth/login" target="_blank" rel="noopener">ECTO</a></li>
-                <li class="link-item"><a href="https://solmatdevs.atlassian.net/servicedesk/customer/portals" target="_blank" rel="noopener">JIRA DQ</a></li>
-                <li class="link-item"><a href="https://onedrive.live.com/" target="_blank" rel="noopener">ONEDRIVE</a></li>
-                <li class="link-item"><a href="https://gfs.geminus-qhom.com/camandata/login.html" target="_blank" rel="noopener">CAMANDATA</a></li>
-                <li class="link-item"><a href="https://sigescapcamanchaca.cl/" target="_blank" rel="noopener">SIGESCAP</a></li>
-                <li class="link-item"><a href="https://gis.camanchaca.cl/lizmap/index.php/view/map?repository=camanchaca&project=camanchaca" target="_blank" rel="noopener">GIS-CAM</a></li>
-                <li class="link-item"><a href="https://mapas.subpesca.cl/ideviewer/" target="_blank" rel="noopener">MAPA SUBP</a></li>
-                <li class="link-item"><a href="https://sisvet.solmat.cl/accounts/login/?next=/" target="_blank" rel="noopener">SISVET</a></li>
-                <li class="link-item"><a href="https://drive.google.com/drive/u/0/my-drive" target="_blank" rel="noopener">GOOGLE DRIVE</a></li>
-                <li class="link-item"><a href="https://pasaportepetrohue.solmat.cl/admin/app/passport/" target="_blank" rel="noopener">PH QR PP</a></li>
-                <li class="link-item"><a href="https://water.ecto.com/Petrohue" target="_blank" rel="noopener">RIL PH</a></li>
-                <li class="link-item"><a href="https://keep.google.com/u/0/" target="_blank" rel="noopener">KEEP</a></li>
-                <li class="link-item"><a href="https://jmaureira.shinyapps.io/proyecto_app_caligus/" target="_blank" rel="noopener">AI_SALUD</a></li>
-                <li class="link-item"><a href="https://app.salmobench.com/" target="_blank" rel="noopener">AQUABENCH</a></li>
-                <li class="link-item"><a href="https://edge.kontali.com/?redirectedFrom=/home" target="_blank" rel="noopener">KONTALI</a></li>
-                <li class="link-item"><a href="https://manolinaqua.com/guides-and-reports-downloads" target="_blank" rel="noopener">MANOLIN</a></li>
-                <li class="link-item"><a href="https://malejdo.github.io/mypanel/" target="_blank" rel="noopener">LINKS MSOTO</a></li>
-                <li class="link-item"><a href="https://camanchacasa.freshservice.com/support/tickets/" target="_blank" rel="noopener">TICKET TI</a></li>
-            </ul>
+    <!-- 2. WEB SYS & DATA -->
+    <section>
+        <div class="section-title">WEB SYS & DATA</div>
+        <div class="grid-container">
+            <a href="https://mail.google.com/mail/u/0/#inbox" target="_blank" class="tile"><i data-lucide="mail"></i><span>GMAIL</span></a>
+            <a href="https://calendar.google.com/calendar/u/0/r" target="_blank" class="tile"><i data-lucide="calendar"></i><span>CALENDAR</span></a>
+            <a href="https://miro.com/app/board/uXjVGv_NrjA=/" target="_blank" class="tile"><i data-lucide="pen-tool"></i><span>MIRO</span></a>
+            <a href="https://salmondata.solmat.cl/" target="_blank" class="tile"><i data-lucide="fish"></i><span>SALMONDATA</span></a>
+            <a href="https://muestreo-peces.solmat.cl/" target="_blank" class="tile"><i data-lucide="shield-check"></i><span>CALIDAD</span><span class="subtitle">E Inocuidad</span></a>
+            <a href="https://gtask.solmat.cl/tareas" target="_blank" class="tile"><i data-lucide="check-square"></i><span>GTASK</span></a>
+            <a href="https://otc-prediccion.onrender.com/" target="_blank" class="tile"><i data-lucide="flask-conical"></i><span>PredOTC</span><span class="subtitle">app</span></a>
+            <a href="https://travelsecurity.kontroltravel.com/default.aspx" target="_blank" class="tile"><i data-lucide="plane"></i><span>TRAVEL</span></a>
+            <a href="https://camanchaca.buk.cl/users/sign_in" target="_blank" class="tile"><i data-lucide="building-2"></i><span>BUK</span></a>
+            <a href="https://auth.rindegastos.com/signin" target="_blank" class="tile"><i data-lucide="receipt"></i><span>RINDEGASTOS</span></a>
+            <a href="http://192.168.54.122:8501/" target="_blank" class="tile"><i data-lucide="sliders"></i><span>PRIMARIA</span></a>
+            <a href="http://10.8.70.2:3000/d/suKpC1fZz12/dashboard-evaluador-camanchaca-red?orgId=1&refresh=%201s" target="_blank" class="tile"><i data-lucide="line-chart"></i><span>LYTHIUM</span></a>
+            <a href="https://www.gtrgestion.cl/login" target="_blank" rel="noopener" class="tile"><i data-lucide="refresh-cw"></i><span>GTR</span></a>
+            <a href="https://app.powerbi.com/home?experience=power-bi" target="_blank" class="tile"><i data-lucide="bar-chart-3"></i><span>POWER BI</span><span class="subtitle">Service</span></a>
+            <a href="https://software.scaleaq.com/Camanchaca/AquaFarmer/#/loginOAuth" target="_blank" class="tile"><i data-lucide="waves"></i><span>AFA</span></a>
+            <a href="http://192.168.2.6/Camanchaca/AquaFUTUREMar/" target="_blank" class="tile"><i data-lucide="anchor"></i><span>AFU</span></a>
+            <a href="https://ecc.camanchaca.cl/sap/bc/gui/sap/its/webgui?sap-client=300#" target="_blank" class="tile"><i data-lucide="box"></i><span>SAP</span></a>
+            <a href="https://app.ecto.com/auth/login" target="_blank" class="tile"><i data-lucide="droplet"></i><span>ECTO</span></a>
+            <a href="https://solmatdevs.atlassian.net/servicedesk/customer/portals" target="_blank" class="tile"><i data-lucide="trello"></i><span>JIRA DQ</span></a>
+            <a href="https://onedrive.live.com/" target="_blank" class="tile"><i data-lucide="cloud"></i><span>ONEDRIVE</span></a>
+            <a href="https://gfs.geminus-qhom.com/camandata/login.html" target="_blank" class="tile"><i data-lucide="hard-drive"></i><span>CAMANDATA</span></a>
+            <a href="https://sigescapcamanchaca.cl/" target="_blank" class="tile"><i data-lucide="graduation-cap"></i><span>SIGESCAP</span></a>
+            <a href="https://gis.camanchaca.cl/lizmap/index.php/view/map?repository=camanchaca&project=camanchaca" target="_blank" class="tile"><i data-lucide="map-pin"></i><span>GIS-CAM</span></a>
+            <a href="https://mapas.subpesca.cl/ideviewer/" target="_blank" class="tile"><i data-lucide="map"></i><span>MAPA SUBP</span></a>
+            <a href="https://sisvet.solmat.cl/accounts/login/?next=/" target="_blank" class="tile"><i data-lucide="shield-alert"></i><span>SISVET</span></a>
+            <a href="https://drive.google.com/drive/u/0/my-drive" target="_blank" class="tile"><i data-lucide="hard-drive"></i><span>GOOGLE</span><span class="subtitle">Drive</span></a>
+            <a href="https://pasaportepetrohue.solmat.cl/admin/app/passport/" target="_blank" class="tile"><i data-lucide="qr-code"></i><span>PH QR PP</span></a>
+            <a href="https://water.ecto.com/Petrohue" target="_blank" class="tile"><i data-lucide="droplets"></i><span>RIL PH</span></a>
+            <a href="https://keep.google.com/u/0/" target="_blank" class="tile"><i data-lucide="sticky-note"></i><span>KEEP</span></a>
+            <a href="https://jmaureira.shinyapps.io/proyecto_app_caligus/" target="_blank" class="tile"><i data-lucide="activity"></i><span>AI_SALUD</span></a>
+            <a href="https://app.salmobench.com/" target="_blank" class="tile"><i data-lucide="trending-up"></i><span>AQUABENCH</span></a>
+            <a href="https://edge.kontali.com/?redirectedFrom=/home" target="_blank" class="tile"><i data-lucide="compass"></i><span>KONTALI</span></a>
+            <a href="https://manolinaqua.com/guides-and-reports-downloads" target="_blank" class="tile"><i data-lucide="file-text"></i><span>MANOLIN</span></a>
+            <a href="https://malejdo.github.io/mypanel/" target="_blank" class="tile"><i data-lucide="link"></i><span>LINKS MSOTO</span></a>
+            <a href="https://camanchacasa.freshservice.com/support/tickets/" target="_blank" class="tile"><i data-lucide="life-buoy"></i><span>TICKET TI</span></a>
         </div>
+    </section>
 
-        <!-- 3. AI GEN -->
-        <div class="group-card">
-            <h2>3. AI GEN</h2>
-            <ul class="link-list">
-                <li class="link-item"><a href="https://www.meta.ai/" target="_blank" rel="noopener">META</a></li>
-                <li class="link-item"><a href="https://gemini.google.com/u/1/app" target="_blank" rel="noopener">GEMINI</a></li>
-                <li class="link-item"><a href="https://chatgpt.com/" target="_blank" rel="noopener">CHATGPT</a></li>
-                <li class="link-item"><a href="https://cursor.com/agents" target="_blank" rel="noopener">CURSOR</a></li>
-                <li class="link-item"><a href="https://www.blackbox.ai/" target="_blank" rel="noopener">BLACKBOX</a></li>
-                <li class="link-item"><a href="https://www.perplexity.ai/" target="_blank" rel="noopener">PERPLEXITY</a></li>
-                <li class="link-item"><a href="https://claude.ai/new" target="_blank" rel="noopener">CLAUDE</a></li>
-                <li class="link-item"><a href="https://chat.mistral.ai/chat" target="_blank" rel="noopener">MISTRAL</a></li>
-                <li class="link-item"><a href="https://grok.com/" target="_blank" rel="noopener">GROK</a></li>
-                <li class="link-item"><a href="https://lmarena.ai/" target="_blank" rel="noopener">LMARENA</a></li>
-                <li class="link-item"><a href="https://llamacoder.together.ai/" target="_blank" rel="noopener">LLAMA (Llamacoder)</a></li>
-            </ul>
+    <!-- 3. AI GEN -->
+    <section>
+        <div class="section-title">AI GEN</div>
+        <div class="grid-container">
+            <a href="https://www.meta.ai/" target="_blank" class="tile"><i data-lucide="sparkles"></i><span>META</span></a>
+            <a href="https://gemini.google.com/u/1/app" target="_blank" class="tile"><i data-lucide="sparkle"></i><span>GEMINI</span></a>
+            <a href="https://chatgpt.com/" target="_blank" class="tile"><i data-lucide="bot"></i><span>CHATGPT</span></a>
+            <a href="https://cursor.com/agents" target="_blank" class="tile"><i data-lucide="mouse-pointer font"></i><span>CURSOR</span></a>
+            <a href="https://www.blackbox.ai/" target="_blank" class="tile"><i data-lucide="square"></i><span>BLACKBOX</span></a>
+            <a href="https://www.perplexity.ai/" target="_blank" class="tile"><i data-lucide="search"></i><span>PERPLEXITY</span></a>
+            <a href="https://claude.ai/new" target="_blank" class="tile"><i data-lucide="message-square"></i><span>CLAUDE</span></a>
+            <a href="https://chat.mistral.ai/chat" target="_blank" class="tile"><i data-lucide="wind"></i><span>MISTRAL</span></a>
+            <a href="https://grok.com/" target="_blank" class="tile"><i data-lucide="zap"></i><span>GROK</span></a>
+            <a href="https://lmarena.ai/" target="_blank" class="tile"><i data-lucide="swords"></i><span>LMARENA</span></a>
+            <a href="https://llamacoder.together.ai/" target="_blank" class="tile"><i data-lucide="code"></i><span>LLAMA</span><span class="subtitle">Llamacoder</span></a>
         </div>
+    </section>
 
-        <!-- 4. TOOLS -->
-        <div class="group-card">
-            <h2>4. TOOLS</h2>
-            <ul class="link-list">
-                <li class="link-item"><a href="https://www.wolframalpha.com/" target="_blank" rel="noopener">WOLFRAM</a></li>
-                <li class="link-item"><a href="https://app.qrcode-tiger.com/?type=Vcard" target="_blank" rel="noopener">VCARD QR</a></li>
-                <li class="link-item"><a href="https://aquainfoexchange.org/welcome/" target="_blank" rel="noopener">AQ_EXCHANGE</a></li>
-                <li class="link-item"><a href="https://www.ioc-sealevelmonitoring.org/map.php" target="_blank" rel="noopener">SEA LEVEL</a></li>
-                <li class="link-item"><a href="https://app.clickup.com/9013480669/v/l/8ckxk6x-253" target="_blank" rel="noopener">CLICKUP</a></li>
-                <li class="link-item"><a href="https://designer.microsoft.com/" target="_blank" rel="noopener">MS DESIGNER</a></li>
-                <li class="link-item"><a href="https://www.canva.com/" target="_blank" rel="noopener">CANVA</a></li>
-                <li class="link-item"><a href="https://gamma.app/create" target="_blank" rel="noopener">GAMMA</a></li>
-                <li class="link-item"><a href="https://notebooklm.google.com/" target="_blank" rel="noopener">GOOGLE NOTEBOOK LM</a></li>
-                <li class="link-item"><a href="https://mapify.so/es/app/new" target="_blank" rel="noopener">MAPIFY</a></li>
-                <li class="link-item"><a href="https://app.diagrams.net/" target="_blank" rel="noopener">DIAGRAM</a></li>
-                <li class="link-item"><a href="https://app.instagantt.com/r" target="_blank" rel="noopener">INSTAGANTT</a></li>
-                <li class="link-item"><a href="https://app.napkin.ai/" target="_blank" rel="noopener">NAPKIN</a></li>
-                <li class="link-item"><a href="https://raphael.app/es" target="_blank" rel="noopener">RAPHAEL APP</a></li>
-                <li class="link-item"><a href="https://aistudio.google.com/u/2/prompts/new_chat?pli=1" target="_blank" rel="noopener">GOOGLE AI STUDIO</a></li>
-                <li class="link-item"><a href="https://app.runwayml.com/" target="_blank" rel="noopener">RUNWAY</a></li>
-                <li class="link-item"><a href="https://app.infography.in/" target="_blank" rel="noopener">INFOGRAPHY</a></li>
-                <li class="link-item"><a href="https://www.presentations.ai/" target="_blank" rel="noopener">PDF -> PPT</a></li>
-                <li class="link-item"><a href="https://www.nerd.lat/" target="_blank" rel="noopener">NERD</a></li>
-                <li class="link-item"><a href="https://theresanaiforthat.com/setup/" target="_blank" rel="noopener">THEREASNAI</a></li>
-                <li class="link-item"><a href="https://app.pfpmaker.com/" target="_blank" rel="noopener">PFPMAKER</a></li>
-                <li class="link-item"><a href="https://www.windy.com/" target="_blank" rel="noopener">WINDY</a></li>
-                <li class="link-item"><a href="https://resizepng.com/" target="_blank" rel="noopener">RESIZE PNGs</a></li>
-                <li class="link-item"><a href="https://agromet.cl/" target="_blank" rel="noopener">AGROMET</a></li>
-                <li class="link-item"><a href="#" target="_blank" rel="noopener">BIG ART</a></li>
-            </ul>
+    <!-- 4. TOOLS -->
+    <section>
+        <div class="section-title">TOOLS</div>
+        <div class="grid-container">
+            <a href="https://www.wolframalpha.com/" target="_blank" class="tile"><i data-lucide="calculator"></i><span>WOLFRAM</span></a>
+            <a href="https://app.qrcode-tiger.com/?type=Vcard" target="_blank" class="tile"><i data-lucide="qr-code"></i><span>VCARD QR</span></a>
+            <a href="https://aquainfoexchange.org/welcome/" target="_blank" class="tile"><i data-lucide="share-2"></i><span>AQ_EXCHANGE</span></a>
+            <a href="https://www.ioc-sealevelmonitoring.org/map.php" target="_blank" class="tile"><i data-lucide="waves"></i><span>SEA LEVEL</span></a>
+            <a href="https://app.clickup.com/9013480669/v/l/8ckxk6x-253" target="_blank" class="tile"><i data-lucide="check-circle-2"></i><span>CLICKUP</span></a>
+            <a href="https://designer.microsoft.com/" target="_blank" class="tile"><i data-lucide="palette"></i><span>MS DESIGNER</span></a>
+            <a href="https://www.canva.com/" target="_blank" class="tile"><i data-lucide="image"></i><span>CANVA</span></a>
+            <a href="https://gamma.app/create" target="_blank" class="tile"><i data-lucide="presentation"></i><span>GAMMA</span></a>
+            <a href="https://notebooklm.google.com/" target="_blank" class="tile"><i data-lucide="book-open"></i><span>NOTEBOOK LM</span></a>
+            <a href="https://mapify.so/es/app/new" target="_blank" class="tile"><i data-lucide="network"></i><span>MAPIFY</span></a>
+            <a href="https://app.diagrams.net/" target="_blank" class="tile"><i data-lucide="git-fork"></i><span>DIAGRAM</span></a>
+            <a href="https://app.instagantt.com/r" target="_blank" class="tile"><i data-lucide="gantt-chart-square"></i><span>INSTAGANTT</span></a>
+            <a href="https://app.napkin.ai/" target="_blank" class="tile"><i data-lucide="file-spread-sheet"></i><span>NAPKIN</span></a>
+            <a href="https://raphael.app/es" target="_blank" class="tile"><i data-lucide="paint-brush"></i><span>RAPHAEL APP</span></a>
+            <a href="https://aistudio.google.com/u/2/prompts/new_chat?pli=1" target="_blank" class="tile"><i data-lucide="cpu"></i><span>AI STUDIO</span></a>
+            <a href="https://app.runwayml.com/" target="_blank" class="tile"><i data-lucide="video"></i><span>RUNWAY</span></a>
+            <a href="https://app.infography.in/" target="_blank" class="tile"><i data-lucide="pie-chart"></i><span>INFOGRAPHY</span></a>
+            <a href="https://www.presentations.ai/" target="_blank" class="tile"><i data-lucide="file-up"></i><span>PDF -> PPT</span></a>
+            <a href="https://www.nerd.lat/" target="_blank" class="tile"><i data-lucide="glasses"></i><span>NERD</span></a>
+            <a href="https://theresanaiforthat.com/setup/" target="_blank" class="tile"><i data-lucide="search-code"></i><span>THEREASNAI</span></a>
+            <a href="https://app.pfpmaker.com/" target="_blank" class="tile"><i data-lucide="user-cog"></i><span>PFPMAKER</span></a>
+            <a href="https://www.windy.com/" target="_blank" class="tile"><i data-lucide="wind"></i><span>WINDY</span></a>
+            <a href="https://resizepng.com/" target="_blank" class="tile"><i data-lucide="scaling"></i><span>RESIZE PNGs</span></a>
+            <a href="https://agromet.cl/" target="_blank" class="tile"><i data-lucide="sun"></i><span>AGROMET</span></a>
+            <a href="#" target="_blank" class="tile"><i data-lucide="chili"></i><span>BIG ART</span></a>
         </div>
+    </section>
 
-        <!-- 5. INFO & APP'S -->
-        <div class="group-card">
-            <h2>5. INFO & APP'S</h2>
-            <ul class="link-list">
-                <li class="link-item"><a href="https://www.genesys-pgr.org/" target="_blank" rel="noopener">GENESYS-PGR.ORG</a></li>
-                <li class="link-item"><a href="https://scispace.com/" target="_blank" rel="noopener">SCISPACE</a></li>
-                <li class="link-item"><a href="https://consensus.app/" target="_blank" rel="noopener">CONSENSUS</a></li>
-                <li class="link-item"><a href="https://onlinelibrary.wiley.com/" target="_blank" rel="noopener">WILEY</a></li>
-                <li class="link-item"><a href="https://www.researchgate.net/" target="_blank" rel="noopener">RESEARCHGATE</a></li>
-                <li class="link-item"><a href="https://satto.cl/" target="_blank" rel="noopener">SATTO</a></li>
-                <li class="link-item"><a href="https://pngs.com/" target="_blank" rel="noopener">PNGs</a></li>
-                <li class="link-item"><a href="https://css-grid-generator.netlify.app/" target="_blank" rel="noopener">CSS GRID GEN</a></li>
-                <li class="link-item"><a href="https://umami.is/" target="_blank" rel="noopener">UMAMI</a></li>
-                <li class="link-item"><a href="https://www.windy.com/" target="_blank" rel="noopener">WINDY</a></li>
-                <li class="link-item"><a href="https://translate.google.com/" target="_blank" rel="noopener">TRANSLATOR</a></li>
-                <li class="link-item"><a href="https://www.linkedin.com/" target="_blank" rel="noopener">LINKEDIN</a></li>
-            </ul>
+    <!-- 5. INFO & APP'S -->
+    <section>
+        <div class="section-title">INFO & APP'S</div>
+        <div class="grid-container">
+            <a href="https://www.genesys-pgr.org/" target="_blank" class="tile"><i data-lucide="glasses"></i><span>GENESYS</span></a>
+            <a href="https://scispace.com/" target="_blank" class="tile"><i data-lucide="atom"></i><span>SCISPACE</span></a>
+            <a href="https://consensus.app/" target="_blank" class="tile"><i data-lucide="microscope"></i><span>CONSENSUS</span></a>
+            <a href="https://onlinelibrary.wiley.com/" target="_blank" class="tile"><i data-lucide="book"></i><span>WILEY</span></a>
+            <a href="https://www.researchgate.net/" target="_blank" class="tile"><i data-lucide="graduation-cap"></i><span>RESEARCHGATE</span></a>
+            <a href="https://satto.cl/" target="_blank" class="tile"><i data-lucide="utensils"></i><span>SATTO</span></a>
+            <a href="https://pngs.com/" target="_blank" class="tile"><i data-lucide="image-minus"></i><span>PNGs</span></a>
+            <a href="https://css-grid-generator.netlify.app/" target="_blank" class="tile"><i data-lucide="grid"></i><span>CSS GRID</span><span class="subtitle">GEN</span></a>
+            <a href="https://umami.is/" target="_blank" class="tile"><i data-lucide="bar-chart-2"></i><span>UMAMI</span></a>
+            <a href="https://www.windy.com/" target="_blank" class="tile"><i data-lucide="wind"></i><span>WINDY</span></a>
+            <a href="https://translate.google.com/" target="_blank" class="tile"><i data-lucide="languages"></i><span>TRANSLATOR</span></a>
+            <a href="https://www.linkedin.com/" target="_blank" class="tile"><i data-lucide="linkedin"></i><span>LINKEDIN</span></a>
         </div>
+    </section>
 
-    </div>
+</div>
+
+<!-- Renderizamos los íconos de Lucide -->
+<script>
+    lucide.createIcons();
+</script>
 
 </body>
+</html>
 </html>
 </html>
