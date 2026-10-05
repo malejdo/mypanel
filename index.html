@@ -3,7 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>nightTab Dashboard</title>
+    <title>Panel Links Msoto</title>
+    <!-- Favicon dinámico SVG de enlace -->
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23ff7900' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71'/><path d='M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71'/></svg>">
     <!-- Cargamos la librería de íconos Lucide -->
     <script src="https://unpkg.com/lucide@latest"></script>
     <style>
@@ -23,6 +25,9 @@
             padding: 20px;
             box-sizing: border-box;
             min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
         }
 
         .dashboard-container {
@@ -30,6 +35,24 @@
             flex-direction: column;
             gap: 25px;
             max-width: 100%;
+        }
+
+        .main-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: #ffffff;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            border-bottom: 1px solid rgba(255, 121, 0, 0.3);
+            padding-bottom: 10px;
+        }
+
+        .main-header i, .main-header svg {
+            width: 28px;
+            height: 28px;
+            color: var(--accent-orange);
         }
 
         .section-title {
@@ -100,11 +123,26 @@
             color: #a0aec0;
             text-transform: none;
         }
+
+        footer {
+            margin-top: 40px;
+            text-align: center;
+            font-size: 0.75rem;
+            color: #a0aec0;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 15px;
+        }
     </style>
 </head>
 <body>
 
 <div class="dashboard-container">
+
+    <!-- HEADER DE LA PÁGINA -->
+    <header class="main-header">
+        <i data-lucide="link"></i>
+        <span>Panel Links Msoto</span>
+    </header>
 
     <!-- 1. DATA SCIENCE -->
     <section>
@@ -235,10 +273,18 @@
 
 </div>
 
+<!-- PIE DE PÁGINA -->
+<footer>
+    by msoto 2026
+</footer>
+
 <!-- Renderizamos los íconos de Lucide -->
 <script>
     lucide.createIcons();
 </script>
+
+</body>
+</html>
 
 </body>
 </html>
